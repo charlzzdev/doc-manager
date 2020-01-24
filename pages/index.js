@@ -1,8 +1,16 @@
+import {
+  ThemeProvider,
+  theme,
+  CSSReset,
+  Heading
+} from '@chakra-ui/core';
+
 const Index = () => {
   return (
-    <div>
-      <h1>next</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CSSReset />
+      <Heading as="h1" size="2xl" >next</Heading>
+    </ThemeProvider>
   )
 }
 
