@@ -9,6 +9,14 @@ const docSchema = new mongoose.Schema({
   }
 });
 
-const Doc = mongoose.model('Doc', docSchema);
+const docLoader = () => {
+  if (mongoose.models.Doc) {
+    return mongoose.model('Doc');
+  } else {
+    return mongoose.model('Doc', docSchema);
+  }
+}
+
+const Doc = docLoader();
 
 export default Doc;
