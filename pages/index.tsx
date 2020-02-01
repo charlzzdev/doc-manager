@@ -2,15 +2,16 @@ import React from 'react';
 import {
   ThemeProvider,
   theme,
-  CSSReset,
-  Heading
+  CSSReset
 } from '@chakra-ui/core';
+
+import Dashboard from '../components/dashboard';
 
 const Index = () => {
   return (
     <ThemeProvider theme={theme}>
       <CSSReset />
-      <Heading as="h1" size="2xl" >next</Heading>
+      <Dashboard />
     </ThemeProvider>
   )
 }
