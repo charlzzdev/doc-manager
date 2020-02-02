@@ -27,7 +27,7 @@ const SideNav = () => (
   <Box
     as="nav"
     width="15rem"
-    height="100vh"
+    height="calc(100vh - 4rem)"
     aria-label="Main navigation"
     borderRightWidth="1px"
     fontSize="sm"
