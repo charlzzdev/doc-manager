@@ -5,7 +5,8 @@ const Editor = () => {
     <div
       style={{
         width: 'calc(100vw - 15rem)',
-        height: 'calc(100vh - 4rem)',
+        maxHeight: 'calc(100vh - 4rem)',
+        overflowY: 'scroll',
         padding: '2rem',
         outline: '0'
       }}
