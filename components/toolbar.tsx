@@ -29,6 +29,11 @@ const toolbar = () => {
       <ToolbarIcon icon="bold" label="Bold" execArgs={['bold']} />
       <ToolbarIcon icon="italic" label="Italic" execArgs={['italic']} />
       <ToolbarIcon icon="underline" label="Underline" execArgs={['underline']} />
+      <span style={{ color: "#e2e8f0", marginLeft: "0.5rem" }}>|</span>
+      <ToolbarIcon icon="leftAlign" label="Left align" execArgs={['justifyLeft']} />
+      <ToolbarIcon icon="centerAlign" label="Center align" execArgs={['justifyCenter']} />
+      <ToolbarIcon icon="rightAlign" label="Right align" execArgs={['justifyRight']} />
+      <ToolbarIcon icon="justifyAlign" label="Justify" execArgs={['justifyFull']} />
     </Flex>
   )
 }
