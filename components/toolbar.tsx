@@ -30,6 +30,7 @@ const ToolbarIcon = ({ icon, label, execArgs }: Props) => (
 const toolbar = () => {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState('Register');
+  const [userData, setUserData] = useState({ email: '' });
 
   return (
     <Flex alignItems="center" justifyContent="space-between" pl="15rem" height="4rem" borderBottomWidth="1px">
@@ -45,19 +46,28 @@ const toolbar = () => {
       </div>
 
       <div style={{ marginRight: "1rem" }}>
-        <Link
-          href="#"
-          color="blue.500"
-          mr="1rem"
-          onClick={() => { setOpen(true); setMode('Register'); }}
-        >Register</Link>
-        <Button
-          onClick={() => { setOpen(true); setMode('Login'); }}
-        >Login</Button>
+        {
+          userData.email === '' ? (
+            <>
+              <Link
+                href="#"
+                color="blue.500"
+                mr="1rem"
+                onClick={() => { setOpen(true); setMode('Register'); }}
+              >Register</Link>
+              <Button
+                onClick={() => { setOpen(true); setMode('Login'); }}
+              >Login</Button>
+            </>
+          ) : (
+              <div>Logged in as {userData.email}</div>
+            )
+        }
         <FormModal
           mode={mode}
           isOpen={open}
           onClose={() => setOpen(false)}
+          onSuccess={(data: { email: string }) => setUserData({ ...data })}
         />
       </div>
     </Flex>
