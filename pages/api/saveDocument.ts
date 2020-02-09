@@ -1,14 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectDb from '../../db/connectDb';
-import Doc from '../../db/models/Doc';
+import docWithCollectionName from '../../db/models/Doc';
 
 connectDb();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const text: String = JSON.parse(req.body).text.trim();
+  const reqBody = JSON.parse(req.body);
 
-  if (!text) {
+  if (!reqBody.text.trim()) {
     res.status(400).json({
       status: 'error',
       message: 'Tried to save an empty document.'
@@ -17,8 +17,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
+    const Doc = docWithCollectionName(reqBody.email);
     const docModel = new Doc({
-      text,
+      text: reqBody.text.trim(),
       created: new Date().toJSON()
     });
     await docModel.save();
