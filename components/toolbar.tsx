@@ -5,6 +5,7 @@ import {
   Tooltip,
   Link,
   Button,
+  useToast
 } from '@chakra-ui/core';
 
 import FormModal from './FormModal';
@@ -27,10 +28,32 @@ const ToolbarIcon = ({ icon, label, execArgs }: Props) => (
   </Tooltip>
 )
 
-const toolbar = () => {
+const toolbar = ({ docInnerHTML }: { docInnerHTML: string }) => {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState('Register');
   const [userData, setUserData] = useState({ email: '' });
+
+  const toast = useToast();
+
+  const saveDocument = () => {
+    fetch('/api/saveDocument', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: userData.email,
+        text: docInnerHTML
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        toast({
+          title: json.status,
+          description: json.message,
+          status: json.status,
+          duration: 9000,
+          isClosable: true,
+        });
+      });
+  }
 
   return (
     <Flex alignItems="center" justifyContent="space-between" pl="15rem" height="4rem" borderBottomWidth="1px">
@@ -60,7 +83,16 @@ const toolbar = () => {
               >Login</Button>
             </>
           ) : (
-              <div>Logged in as {userData.email}</div>
+              <>
+                <Link
+                  href="#"
+                  color="blue.500"
+                  mr="1rem"
+                >{userData.email}</Link>
+                <Button
+                  onClick={saveDocument}
+                >Save</Button>
+              </>
             )
         }
         <FormModal

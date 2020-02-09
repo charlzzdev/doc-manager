@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, ChangeEvent } from 'react';
 
-const Editor = () => {
+const Editor = ({ setDocInnerHTML }: { setDocInnerHTML: Dispatch<SetStateAction<string>> }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Editor = () => {
         outline: '0'
       }}
       spellCheck={false}
-      dangerouslySetInnerHTML={{ __html: '<b>bold <i>italic</i> <u>words</u></b>' }}
+      onInput={(e: ChangeEvent<HTMLDivElement>) => setDocInnerHTML(e.target.innerHTML)}
       contentEditable
     ></div>
   )
